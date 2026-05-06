@@ -1,30 +1,60 @@
 import React from 'react';
-import { AlienMiniAppProvider, useAlienMiniApp } from '@alien-id/miniapps-react';
-
-const SafeSwapUI = () => {
-  // Use the updated hook name here
-  const miniApp = useAlienMiniApp(); 
-
-  return (
-    <div style={{ backgroundColor: '#000', color: '#fff', minHeight: '100vh', padding: '20px', fontFamily: 'sans-serif' }}>
-      <h1 style={{ color: '#0f0' }}>Alien SafeSwap</h1>
-      <p>Status: {miniApp ? 'Connected to Alien' : 'Disconnected'}</p>
-      <div style={{ border: '1px solid #333', padding: '20px', borderRadius: '10px' }}>
-        <h3>Swap Tokens</h3>
-        <input type="number" placeholder="0.0" style={{ width: '100%', padding: '10px', marginBottom: '10px' }} />
-        <button style={{ backgroundColor: '#0f0', color: '#000', width: '100%', padding: '10px', fontWeight: 'bold' }}>
-          Swap Now
-        </button>
-      </div>
-    </div>
-  );
-};
 
 function App() {
   return (
-    <AlienMiniAppProvider>
-      <SafeSwapUI />
-    </AlienMiniAppProvider>
+    <div style={{ 
+      backgroundColor: '#0b0b0b', 
+      color: '#00ff00', 
+      minHeight: '100vh', 
+      display: 'flex', 
+      flexDirection: 'column', 
+      alignItems: 'center', 
+      justifyContent: 'center',
+      fontFamily: 'monospace'
+    }}>
+      <div style={{ 
+        border: '2px solid #00ff00', 
+        padding: '40px', 
+        borderRadius: '15px',
+        boxShadow: '0 0 20px #00ff00',
+        textAlign: 'center',
+        backgroundColor: '#1a1a1a'
+      }}>
+        <h1 style={{ fontSize: '2.5rem', marginBottom: '20px' }}>ALIEN SAFESWAP</h1>
+        <p style={{ color: '#888', marginBottom: '30px' }}>Secure Blockchain Terminal Active</p>
+        
+        <div style={{ marginBottom: '20px' }}>
+          <input 
+            type="number" 
+            placeholder="0.00 SOL" 
+            style={{ 
+              padding: '12px', 
+              borderRadius: '5px', 
+              border: '1px solid #00ff00', 
+              backgroundColor: '#000', 
+              color: '#0f0',
+              width: '200px'
+            }} 
+          />
+        </div>
+        
+        <button style={{ 
+          backgroundColor: '#00ff00', 
+          color: '#000', 
+          padding: '12px 30px', 
+          border: 'none', 
+          borderRadius: '5px', 
+          fontWeight: 'bold',
+          cursor: 'pointer',
+          fontSize: '1rem'
+        }}>
+          INITIATE SWAP
+        </button>
+      </div>
+      <p style={{ marginTop: '20px', fontSize: '0.8rem', color: '#444' }}>
+        App Address: PENDING_REGISTRATION
+      </p>
+    </div>
   );
 }
 
