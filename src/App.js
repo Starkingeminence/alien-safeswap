@@ -9,14 +9,34 @@ function SafeSwapTerminal() {
   // YOUR PERSONAL WALLET (Where you receive fees)
   const SYSTEM_VAULT = "5jHUYhkfqsd1egCSiEsVDYVX8YRW7UYst4HCqJZCtzyj";
 
-  const handleInitiate = () => {
-    if (!alienAmount || !solPrice) {
-      alert("ERROR: INPUT REQUIRED.");
-      return;
+  const handleInitiate = async () => {
+  if (!alienAmount || !solPrice) return alert("ERROR: INPUT REQUIRED");
+
+  try {
+    // 1. Call your new "Brain" in the cloud
+    const response = await fetch('https://kmuvdptxxkktytsdcccq.functions.supabase.co/create-trade', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        seller_address: wallet?.address || "GUEST_WALLET", // From Alien SDK
+        alien_amount: parseFloat(alienAmount),
+        sol_price: parseFloat(solPrice)
+      }),
+    });
+
+    const tradeData = await response.json();
+
+    if (tradeData.escrow_address) {
+      // 2. Show the user the unique wallet address
+      alert(`SUCCESS!\n\nEscrow Wallet Created:\n${tradeData.escrow_address}\n\nPlease send ${alienAmount} Alien to this address to begin.`);
+    } else {
+      alert("FAILED: " + (tradeData.error || "Unknown Error"));
     }
-    // This will eventually trigger the Supabase function
-    alert(INITIATING SWAP...);
-  };
+  } catch (err) {
+    alert("SYSTEM ERROR: Check console");
+    console.error(err);
+  }
+};
 
   return (
     <div style={styles.container}>
